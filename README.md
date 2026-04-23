@@ -1,57 +1,43 @@
 # Project: ecommerce-website
-A simple e-commerce website for a small business which sells apparels. User can search for products, browse through the available products and also view the details of any product. 
 
-#### Tools used for the project:
-  - Frontend: HTML, CSS, JavaScript
-  - Backend: Python-Flask
-  - Database Component: PostgreSQL
-  - Cache Component: Redis
+A simple e-commerce website for a small business which sells apparels. Users can search for products, browse available products, view product details, upload product images, and access backend services with PostgreSQL, Redis, Docker, and JWT-based admin authentication.
 
-# Overview of API specs
-The backend exposes API routes for seven functionalities:
-  1. Header
-  2. Home
-  3. Products
-  4. Product-Details
-  5. Category
-  6. Search
-  7. Ingestion
+## Tools used for the project
 
-The details regarding the APIs can be found in this [document](https://docs.google.com/document/d/1oUA8EzTVEeVuQZPuW5lUjyoHHjosA5ALpCVDKJ1Allk/edit?usp=sharing)
+- Frontend: HTML, CSS, JavaScript
+- Backend: Python Flask
+- Database: PostgreSQL
+- Cache: Redis
+- Containerization: Docker, Docker Compose
+- Authentication: JWT
 
-# Installation Instructions
-## To run the application locally:
-  1. Change the host in the db_object.py and cache_object.py files to ```localhost```.
-  2. The frontend is hosted in the nginx docker container. To run the frontend:
-  
-     ```
-     cd frontend
-     docker build . -t frontend_docker
-     docker run -it --rm -p 8080:80 frontend_docker
-     ```
-  3. The frontend is now running on the port 8080.
-  4. To run the backend:
-     
-     ```
-     cd ../backend
-     python3 backend.py
-     ```
-  5. The backend is now running on the port 3000.
+## Features
 
-## To run the application using docker containers:
-  1. To run the frontend:
-     ```
-     cd frontend
-     docker build . -t frontend_docker
-     ```
-  2. To run the backend:
-     ```
-     cd ../backend
-     docker build . -t backend_docker
-     ```
-  3. In the docker compose file, change the image names of the frontend and backend services to ```frontend_docker``` and ```backend_docker``` respectively.
-  4. In the root directory, run the following command:
-     ```
-     docker-compose up
-     ```
-  5. Now the frontend is running on port 5000 while the backend is running on port 3000.
+- Home page with featured products
+- Products listing page
+- Product details
+- Image upload
+- PostgreSQL-backed product storage
+- Redis caching for home and products APIs
+- JWT-protected product upload
+- Docker Compose multi-container setup
+
+## API overview
+
+The backend exposes API routes for:
+
+1. `/` – health check
+2. `/home/` – featured products
+3. `/products?page=1` – products listing
+4. `/uploads/<filename>` – serve uploaded images
+5. `/upload` – upload image
+6. `/login` – admin login
+7. `/add-product` – protected product creation
+
+## Run locally with Docker Compose
+
+From the project root:
+
+```bash
+docker compose down -v
+docker compose up -d --build
